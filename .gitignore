@@ -1,0 +1,17 @@
+__pycache__
+
+*.*-
+
+*.pyc
+
+.idea
+
+.venv
+
+.vscode
+
+vir
+Lib
+Scripts
+pyenv.cfg
+Include

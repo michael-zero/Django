@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <title>Zero Corps</title>
+</head>
+<body>
+    <h1>Bem vindo</h1>
+    <h2>{{Curso}}</h2>
+
+    <h1>Campeão da Libertadores</h1>
+    <img src="{% static 'images/campeao.jpg' %}">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <!-- <th>Estoque</th> -->
+            </tr>
+        </thead>
+        <tbody>
+          
+            {% for produto in produtos%}
+            <tr>
+                <!-- url (nomeRota la na url [name]) parametro -->
+                <td><a href="{% url 'produto' produto.id %}">{{produto.nome}}</a></td>
+                <td>{{produto.preco}}</td>
+                <!-- <td>{{produto.estoque}}</td> -->
+            </tr>
+            {%endfor%}
+            
+         </tbody>
+    </table>
+
+    <button onclick="teste();">Clique-me</button>
+
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
