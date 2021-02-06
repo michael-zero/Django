@@ -7,6 +7,7 @@ from django.db.models import signals
 #slug 
 from django.template.defaultfilters import slugify
 
+
 class Base(models.Model):
     criado = models.DateField('Data de criação', auto_now_add=True)
     modificado = models.DateField('Data de atualização', auto_now_add=True)

@@ -1,6 +1,7 @@
 from django import forms
 from django.core.mail.message import EmailMessage
-
+#Produto
+from .models import Produto
 #python manage.py shell
 #from django import forms
 #help(CharField) - info do método
@@ -28,3 +29,7 @@ class ContatoForm(forms.Form):
 
         mail.send()
 
+class ProdutoModelForm(forms.ModelForm):
+    class Meta:
+        model = Produto
+        fields = ['nome','preco','estoque','imagem']
