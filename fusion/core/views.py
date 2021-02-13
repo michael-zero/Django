@@ -10,8 +10,9 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         # Recupera o contexto
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['servicos'] = Servico.objects.all()
-        context['funcionarios'] = Funcionario.objects.all()
+        # captura todos por qualquer ordem 
+        context['servicos'] = Servico.objects.order_by('?').all() 
+        context['funcionarios'] = Funcionario.objects.order_by('?').all()
         return context
 
 
