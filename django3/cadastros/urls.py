@@ -1,5 +1,7 @@
 from django.urls import path 
+from .views import CampoCreate, AtividadeCreate
 
 urlpatterns = [
-    path('endereço', MinhaView.as_view(), name='name-da-url')
+    path('cadastrar/campo/', CampoCreate.as_view(), name='cadastros-campo'),
+    path('cadastrar/atividade/',AtividadeCreate.as_view(), name='cadastrar-atividade')
 ]
