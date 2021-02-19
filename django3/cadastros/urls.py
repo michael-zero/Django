@@ -5,7 +5,7 @@ from .views import CampoDelete, AtividadeDelete
 from .views import CampoList, AtividadeList
 
 urlpatterns = [
-    path('cadastrar/campo/', CampoCreate.as_view(), name='cadastros-campo'),
+    path('cadastrar/campo/', CampoCreate.as_view(), name='cadastrar-campo'),
     path('cadastrar/atividade/',AtividadeCreate.as_view(), name='cadastrar-atividade'),
     # EDITAR
     path('editar/campo/<int:pk>/',CampoUpdate.as_view(), name='editar-campo'),
