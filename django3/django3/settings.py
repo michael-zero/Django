@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'paginas',
     'cadastros',
     'crispy_forms',
+    'usuarios',
 ]
 
 
@@ -131,3 +132,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+# Autenticação 
+LOGIN_REDIRECT_URL = 'index' #vai pra index ao logar
+LOGOUT_REDIRECT_URL = 'login' #onde vai depois que fizer logout 
+LOGIN_URL = 'login' #caso precise acessar algo que precisa de login... ele será redirecionado pra login
