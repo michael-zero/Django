@@ -29,15 +29,40 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
             </li>
+            {% if request.user.is_authenticated  %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'cadastrar-atividade' %}">Atividade</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'cadastrar-campo'%}">Campo</a>
             </li>
+            {% endif %}
+            
+            {% comment %} DROPMENU {% endcomment %}
+             <div class="dropdown">
+             {% if request.user.is_authenticated %}
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Listagem
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{% url 'listar-campos' %}">Listar Campos</a>
+                  <a class="dropdown-item" href="{% url 'listar-atividades' %}">Listar Atividade</a>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+                </div>
+             </div>
+
+            {% comment %} ElSE {% endcomment %}
+            {% else %}  
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login'%}">Entrar</a>
+            </li>
+
+             {% endif %}
+            {% comment %} FIM dropmenu {% endcomment %}
             <li class="nav-item">
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
+
           </ul>
         </div>
       </div>
