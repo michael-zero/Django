@@ -4,8 +4,10 @@ from .models import Atividade, Campo
 from django.urls import reverse_lazy
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.views import GroupRequiredMixin
 
-class CampoCreate(LoginRequiredMixin,CreateView):
+class CampoCreate(GroupRequiredMixin,LoginRequiredMixin,CreateView):
+    group_required = u"Administrador" 
     login_url = reverse_lazy('login')
     model = Campo
     # lista campos que aparecerão no form 
@@ -14,7 +16,8 @@ class CampoCreate(LoginRequiredMixin,CreateView):
     # Depois que cadastrar com sucesso, redireciona pro index 
     success_url = reverse_lazy('listar-campos')
 
-class AtividadeCreate(LoginRequiredMixin,CreateView):
+class AtividadeCreate(GroupRequiredMixin,LoginRequiredMixin,CreateView):
+    group_required = u"Administrador"
     login_url = reverse_lazy('login')
     model = Atividade
     fields = ['numero','descricao','pontos','detalhes', 'campo']
@@ -24,14 +27,16 @@ class AtividadeCreate(LoginRequiredMixin,CreateView):
 
 # UPDATE
 
-class CampoUpdate(LoginRequiredMixin,UpdateView):
+class CampoUpdate(GroupRequiredMixin,LoginRequiredMixin,UpdateView):
+    group_required = u"Administrador"
     login_url = reverse_lazy('login')
     model = Campo
     fields = ['nome', 'descricao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-campos')
 
-class AtividadeUpdate(LoginRequiredMixin,UpdateView):
+class AtividadeUpdate(GroupRequiredMixin,LoginRequiredMixin,UpdateView):
+    group_required = u"Administrador"
     login_url = reverse_lazy('login')
     model = Atividade
     fields = ['numero','descricao', 'pontos','detalhes', 'campo']
@@ -40,13 +45,15 @@ class AtividadeUpdate(LoginRequiredMixin,UpdateView):
 
 
 # DELETE
-class CampoDelete(LoginRequiredMixin,DeleteView):
+class CampoDelete(GroupRequiredMixin,LoginRequiredMixin,DeleteView):
+    group_required = u"Administrador"
     login_url = reverse_lazy('login')
     model = Campo
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-campos')
 
-class AtividadeDelete(LoginRequiredMixin,DeleteView):
+class AtividadeDelete(GroupRequiredMixin,LoginRequiredMixin,DeleteView):
+    group_required = u"Administrador"
     login_url = reverse_lazy('login')
     model = Atividade
     template_name = 'cadastros/form-excluir.html'
@@ -55,7 +62,8 @@ class AtividadeDelete(LoginRequiredMixin,DeleteView):
 
 #LISTAR
 # necessita de autenticação, se n tiver, vai pra login
-class CampoList(LoginRequiredMixin,ListView):
+class CampoList(GroupRequiredMixin,LoginRequiredMixin,ListView):
+    group_required = u"Administrador"
     login_url = reverse_lazy('login')
     model = Campo
     template_name = 'cadastros/listas/campo.html'
