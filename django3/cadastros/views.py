@@ -3,7 +3,10 @@ from django.views.generic.list import ListView
 from .models import Atividade, Campo
 from django.urls import reverse_lazy
 
-class CampoCreate(CreateView):
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class CampoCreate(LoginRequiredMixin,CreateView):
+    login_url = reverse_lazy('login')
     model = Campo
     # lista campos que aparecerão no form 
     fields = ['nome', 'descricao']
@@ -11,7 +14,8 @@ class CampoCreate(CreateView):
     # Depois que cadastrar com sucesso, redireciona pro index 
     success_url = reverse_lazy('listar-campos')
 
-class AtividadeCreate(CreateView):
+class AtividadeCreate(LoginRequiredMixin,CreateView):
+    login_url = reverse_lazy('login')
     model = Atividade
     fields = ['numero','descricao','pontos','detalhes', 'campo']
     template_name = 'cadastros/form.html'
@@ -20,13 +24,15 @@ class AtividadeCreate(CreateView):
 
 # UPDATE
 
-class CampoUpdate(UpdateView):
+class CampoUpdate(LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
     model = Campo
     fields = ['nome', 'descricao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-campos')
 
-class AtividadeUpdate(UpdateView):
+class AtividadeUpdate(LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
     model = Atividade
     fields = ['numero','descricao', 'pontos','detalhes', 'campo']
     template_name = 'cadastros/form.html'
@@ -34,21 +40,26 @@ class AtividadeUpdate(UpdateView):
 
 
 # DELETE
-class CampoDelete(DeleteView):
+class CampoDelete(LoginRequiredMixin,DeleteView):
+    login_url = reverse_lazy('login')
     model = Campo
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-campos')
 
-class AtividadeDelete(DeleteView):
+class AtividadeDelete(LoginRequiredMixin,DeleteView):
+    login_url = reverse_lazy('login')
     model = Atividade
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-atividades')
 
 
 #LISTAR
-class CampoList(ListView):
+# necessita de autenticação, se n tiver, vai pra login
+class CampoList(LoginRequiredMixin,ListView):
+    login_url = reverse_lazy('login')
     model = Campo
     template_name = 'cadastros/listas/campo.html'
+    
 
 class AtividadeList(ListView):
     model = Atividade
